@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Buttercream</title>
+<meta name="theme-color" content="#0D0B08">
+<meta name="description" content="The Buttercream Juice Bar & Cafe, Mount Lavinia. Order cakes, cupcakes and short eats online.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Buttercream">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Abhaya+Libre:wght@600;800&family=Noto+Sans+Sinhala:wght@400;500;700&family=Noto+Sans+Tamil:wght@400;500;700&display=swap" rel="stylesheet">
@@ -165,6 +174,50 @@ footer.site .admin-link{background:none;border:0;color:#7E7058;text-decoration:u
 .lang:hover{border-color:var(--gold-mid)}
 .admin-cup{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:18px;border-radius:50%;border:1px solid rgba(211,166,74,.35);background:transparent;color:var(--gold-mid);opacity:.55;transition:opacity .15s,border-color .15s}
 .admin-cup:hover,.admin-cup:focus-visible{opacity:1;border-color:var(--gold-mid)}
+.pw{position:relative}
+.pw input{padding-right:50px}
+.pw-toggle{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;background:transparent;color:var(--muted);border-radius:10px;display:grid;place-items:center}
+.pw-toggle:hover{color:var(--gold)}
+.pw-toggle[aria-pressed="true"]{color:var(--gold)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.stat .v{font-family:var(--si-display);font-size:1.55rem;font-weight:800;color:var(--gold);line-height:1.2}
+.stat .k{color:var(--muted);font-size:.88rem}
+.range{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.range>div{flex:1 1 150px;max-width:220px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:10px}
+.tablewrap table{border-collapse:collapse;width:100%;font-size:.9rem}
+.tablewrap th,.tablewrap td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap;vertical-align:top}
+.tablewrap th{background:var(--soft);font-weight:700}
+.tablewrap td.items{white-space:normal;min-width:240px}
+.tablewrap .num{text-align:right}
+.tablewrap a{color:var(--gold)}
+.tablewrap tbody tr:last-child td{border-bottom:0}
+.print-title{display:none}
+.hero-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.install{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--gold-mid);background:rgba(211,166,74,.12);color:var(--gold-hi);border-radius:999px;padding:5px 12px;font-size:.85rem;line-height:1.3;min-height:32px;font-weight:500}
+.install:hover{background:rgba(211,166,74,.22)}
+.promo{background:var(--goldgrad);color:#1B1408;font-weight:700;font-size:.98rem}
+.promo .wrap{display:flex;gap:10px;justify-content:center;align-items:center;text-align:center;padding-top:11px;padding-bottom:11px}
+.menu-head{flex-wrap:wrap}
+.track-btn{display:inline-flex;align-items:center;gap:6px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 6px}
+.step span{display:block;height:6px;border-radius:3px;background:var(--line)}
+.step.on span{background:var(--goldgrad)}
+.step small{display:block;margin-top:4px;font-size:.72rem;color:var(--muted);text-align:center;line-height:1.3}
+.step.on small{color:var(--gold);font-weight:700}
+.track-card{margin-bottom:10px}
+@media print{
+  .topbar,.tabs,.report-actions,.cartbar,.langs{display:none !important}
+  body{background:#fff;color:#000}
+  .print-title{display:block;margin:0 0 10px;font-size:1.1rem}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat,.tablewrap{border-color:#bbb;background:#fff}
+  .tablewrap{overflow:visible}
+  .tablewrap th{background:#eee}
+  .tablewrap a{color:#000;text-decoration:none}
+  tr{break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -181,6 +234,19 @@ const LOGO = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQ
 const LANGS = [{id:"si",label:"සිංහල"},{id:"en",label:"English"},{id:"ta",label:"தமிழ்"}];
 const T = {
 si:{
+  installApp:"ඇප් එක දාගන්න", iosTitle:"ෆෝන් එකට ඇප් එක දාගන්න", iosSteps:"Safari එකේ පහළ තියෙන Share බොත්තම (⬆️) ඔබලා, \"Add to Home Screen\" තෝරලා \"Add\" ඔබන්න. එතකොට ෆෝන් එකේ The Buttercream අයිකනයක් හැදෙනවා.",
+  trackBtn:"ඇණවුම බලන්න", trackTitle:"ඇණවුමේ තත්ත්වය", trackSub:"ඇණවුම් අංකය සහ ඇණවුම් කරපු ෆෝන් අංකය දාන්න.", orderNoLabel:"ඇණවුම් අංකය", check:"බලන්න", checking:"බලමින්...",
+  notFound:"ඒ අංක දෙකට ගැළපෙන ඇණවුමක් හම්බ වුණේ නැහැ. අංක දෙක ආයෙ බලන්න.", errNo:"ඇණවුම් අංකය දාන්න.", myOrders:"මේ ෆෝන් එකෙන් දාපු ඇණවුම්", trackOther:"වෙනත් ඇණවුමක් බලන්න",
+  statusMsg:{new:"ඇණවුම ලැබුණා. ඉක්මනින් හදන්න පටන් ගන්නවා.",making:"ඔබේ ඇණවුම දැන් හදමින් පවතිනවා.",ready:"ඔබේ ඇණවුම සූදානම්! ගන්න එන්න.",done:"ඇණවුම භාර දුන්නා. ස්තුතියි!",cancel:"මේ ඇණවුම අවලංගු කරලා. විස්තර දැනගන්න අපිට කතා කරන්න."},
+  promoTitle:"දීමනා බැනරය", promoOn:"බැනරය කස්ටමර්ලාට පෙන්වන්න", promoSi:"දීමනාව (සිංහල)", promoEn:"දීමනාව (ඉංග්‍රීසි)", promoTa:"දීමනාව (දෙමළ)",
+  promoPh:"උදා: මේ සතියේ කප් කේක් 6ක් ගත්තොත් 1ක් නොමිලේ!", promoNote:"මෙනුවට උඩින් රන්වන් තීරුවක පේනවා. භාෂාවක් හිස්ව තිබුණොත් සිංහල පාඨය පේනවා.", savePromo:"බැනරය සුරකින්න",
+  tabReports:"වාර්තා", dateRange:"කාල සීමාව", from:"සිට", to:"දක්වා", today:"අද", last7:"පසුගිය දින 7", thisMonth:"මේ මාසය", allTime:"ඔක්කොම", show:"පෙන්වන්න",
+  rOrders:"ඇණවුම්", rDelivered:"භාර දුන්", rPending:"තවම කළ යුතු", rCancelled:"අවලංගු", rSales:"භාර දුන් ඇණවුම් වටිනාකම", rCustomers:"කස්ටමර්ලා",
+  viewOrders:"ඇණවුම් ලැයිස්තුව", viewCustomers:"කස්ටමර් ලැයිස්තුව", colNo:"අංකය", colReceived:"ලැබුණු දිනය", colNeeded:"අවශ්‍ය දිනය", colName:"නම", colPhone:"දුරකථන",
+  colItems:"අයිතම", colTotal:"මුළු මුදල", colStatus:"තත්ත්වය", colOrderCount:"ඇණවුම් ගණන", colSpent:"ඇණවුම් වටිනාකම", colLast:"අන්තිම ඇණවුම",
+  downloadCsv:"Excel (CSV) බාගන්න", print:"මුද්‍රණය", noReport:"මේ කාලයේ ඇණවුම් නැහැ.", reportLoading:"වාර්තාව සකසමින්...", errReport:"වාර්තාව පූරණය කරන්න බැරි වුණා: ",
+  reportNote:"වාර්තාව හැදෙන්නේ Supabase එකේ ගබඩා වෙලා තියෙන ඇණවුම් වලින්. ලොග් වෙන ඕනෑම ඇඩ්මින් කෙනෙකුට බලන්න පුළුවන්.", spentNote:"අවලංගු ඇණවුම් ගණන් කරලා නැහැ.",
+  showPw:"මුරපදය පෙන්වන්න", hidePw:"මුරපදය සඟවන්න",
   cur:"රු.", loading:"මෙනුව පූරණය වෙමින්...", loadErr:"මෙනුව පූරණය කරන්න බැරි වුණා. අන්තර්ජාලය පරීක්ෂා කර නැවත උත්සාහ කරන්න.", retry:"නැවත උත්සාහ කරන්න",
   logoAlt:"{name} ලාංඡනය", taglineDefault:"රසවත් කේක්, ෆ්‍රෙෂ් ජූස් සහ උණුසුම් කෑම. උපන්දින කේක් කලින් ඇණවුම් කරන්න.",
   ourMenu:"අපේ මෙනුව", categories:"වර්ග", perKg:"/ කි.ග්‍රෑ.", soldOut:"අද නැහැ", emptyCat:"මේ වර්ගයේ අයිතම තවම නැහැ.",
@@ -211,6 +277,19 @@ si:{
   weights:{"0.5":"ග්‍රෑ. 500","1":"කි.ග්‍රෑ. 1","1.5":"කි.ග්‍රෑ. 1.5","2":"කි.ග්‍රෑ. 2"}
 },
 en:{
+  installApp:"Install app", iosTitle:"Add the app to your phone", iosSteps:"In Safari, tap the Share button (⬆️) at the bottom, choose \"Add to Home Screen\", then tap \"Add\". The Buttercream icon will appear on your phone.",
+  trackBtn:"Track order", trackTitle:"Order status", trackSub:"Enter your order number and the phone number you ordered with.", orderNoLabel:"Order number", check:"Check", checking:"Checking...",
+  notFound:"No order matches those numbers. Please check them again.", errNo:"Enter the order number.", myOrders:"Orders placed from this phone", trackOther:"Check another order",
+  statusMsg:{new:"We've received your order and will start soon.",making:"Your order is being prepared.",ready:"Your order is ready to collect!",done:"Order delivered. Thank you!",cancel:"This order was cancelled. Please call us for details."},
+  promoTitle:"Offer banner", promoOn:"Show the banner to customers", promoSi:"Offer (Sinhala)", promoEn:"Offer (English)", promoTa:"Offer (Tamil)",
+  promoPh:"e.g. Buy 6 cupcakes this week, get 1 free!", promoNote:"Shows in a gold strip above the menu. If a language is empty, the Sinhala text is shown.", savePromo:"Save banner",
+  tabReports:"Reports", dateRange:"Period", from:"From", to:"To", today:"Today", last7:"Last 7 days", thisMonth:"This month", allTime:"All time", show:"Show",
+  rOrders:"Orders", rDelivered:"Delivered", rPending:"Pending", rCancelled:"Cancelled", rSales:"Delivered sales", rCustomers:"Customers",
+  viewOrders:"Order list", viewCustomers:"Customer list", colNo:"No.", colReceived:"Received", colNeeded:"Needed", colName:"Name", colPhone:"Phone",
+  colItems:"Items", colTotal:"Total", colStatus:"Status", colOrderCount:"Orders", colSpent:"Order value", colLast:"Last order",
+  downloadCsv:"Download Excel (CSV)", print:"Print", noReport:"No orders in this period.", reportLoading:"Preparing report...", errReport:"Couldn't load the report: ",
+  reportNote:"Built from the orders saved in Supabase. Any admin who logs in can see it.", spentNote:"Cancelled orders are not counted.",
+  showPw:"Show password", hidePw:"Hide password",
   cur:"Rs.", loading:"Loading menu...", loadErr:"Couldn't load the menu. Check your internet connection and try again.", retry:"Try again",
   logoAlt:"{name} logo", taglineDefault:"Delicious cakes, fresh juices and warm bites. Pre-order your birthday cake.",
   ourMenu:"Our Menu", categories:"Categories", perKg:"/ kg", soldOut:"Not available today", emptyCat:"No items in this category yet.",
@@ -241,6 +320,19 @@ en:{
   weights:{"0.5":"500 g","1":"1 kg","1.5":"1.5 kg","2":"2 kg"}
 },
 ta:{
+  installApp:"செயலியை நிறுவு", iosTitle:"செயலியை உங்கள் போனில் சேர்க்கவும்", iosSteps:"Safari-யில் கீழே உள்ள Share பொத்தானை (⬆️) அழுத்தி, \"Add to Home Screen\" தேர்ந்தெடுத்து \"Add\" அழுத்தவும். உங்கள் போனில் The Buttercream ஐகான் தோன்றும்.",
+  trackBtn:"ஆர்டரைக் கண்காணி", trackTitle:"ஆர்டர் நிலை", trackSub:"உங்கள் ஆர்டர் எண்ணையும் ஆர்டர் செய்த தொலைபேசி எண்ணையும் உள்ளிடவும்.", orderNoLabel:"ஆர்டர் எண்", check:"சரிபார்", checking:"சரிபார்க்கிறது...",
+  notFound:"அந்த எண்களுக்குப் பொருந்தும் ஆர்டர் இல்லை. மீண்டும் சரிபார்க்கவும்.", errNo:"ஆர்டர் எண்ணை உள்ளிடவும்.", myOrders:"இந்த போனிலிருந்து செய்த ஆர்டர்கள்", trackOther:"வேறு ஆர்டரைச் சரிபார்",
+  statusMsg:{new:"உங்கள் ஆர்டர் கிடைத்தது. விரைவில் தயாரிக்கத் தொடங்குவோம்.",making:"உங்கள் ஆர்டர் தயாரிக்கப்படுகிறது.",ready:"உங்கள் ஆர்டர் தயார்! வந்து எடுத்துக்கொள்ளுங்கள்.",done:"ஆர்டர் வழங்கப்பட்டது. நன்றி!",cancel:"இந்த ஆர்டர் ரத்து செய்யப்பட்டது. விவரங்களுக்கு எங்களை அழைக்கவும்."},
+  promoTitle:"சலுகை பேனர்", promoOn:"வாடிக்கையாளர்களுக்கு பேனரைக் காட்டு", promoSi:"சலுகை (சிங்களம்)", promoEn:"சலுகை (ஆங்கிலம்)", promoTa:"சலுகை (தமிழ்)",
+  promoPh:"உதா: இந்த வாரம் 6 கப்கேக் வாங்கினால் 1 இலவசம்!", promoNote:"மெனுவுக்கு மேலே தங்க நிறப் பட்டையில் தோன்றும். ஒரு மொழி காலியாக இருந்தால் சிங்கள உரை காட்டப்படும்.", savePromo:"பேனரைச் சேமி",
+  tabReports:"அறிக்கைகள்", dateRange:"காலம்", from:"முதல்", to:"வரை", today:"இன்று", last7:"கடந்த 7 நாட்கள்", thisMonth:"இந்த மாதம்", allTime:"அனைத்தும்", show:"காட்டு",
+  rOrders:"ஆர்டர்கள்", rDelivered:"வழங்கப்பட்டவை", rPending:"நிலுவையில்", rCancelled:"ரத்தானவை", rSales:"வழங்கிய விற்பனை", rCustomers:"வாடிக்கையாளர்கள்",
+  viewOrders:"ஆர்டர் பட்டியல்", viewCustomers:"வாடிக்கையாளர் பட்டியல்", colNo:"எண்", colReceived:"பெறப்பட்டது", colNeeded:"தேவை", colName:"பெயர்", colPhone:"தொலைபேசி",
+  colItems:"பொருட்கள்", colTotal:"மொத்தம்", colStatus:"நிலை", colOrderCount:"ஆர்டர்கள்", colSpent:"ஆர்டர் மதிப்பு", colLast:"கடைசி ஆர்டர்",
+  downloadCsv:"Excel (CSV) பதிவிறக்கு", print:"அச்சிடு", noReport:"இந்தக் காலத்தில் ஆர்டர்கள் இல்லை.", reportLoading:"அறிக்கை தயாராகிறது...", errReport:"அறிக்கையை ஏற்ற முடியவில்லை: ",
+  reportNote:"Supabase-இல் சேமிக்கப்பட்ட ஆர்டர்களிலிருந்து உருவாக்கப்படுகிறது. உள்நுழையும் எந்த நிர்வாகியும் பார்க்கலாம்.", spentNote:"ரத்தான ஆர்டர்கள் கணக்கிடப்படவில்லை.",
+  showPw:"கடவுச்சொல்லைக் காட்டு", hidePw:"கடவுச்சொல்லை மறை",
   cur:"ரூ.", loading:"மெனு ஏற்றப்படுகிறது...", loadErr:"மெனுவை ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.", retry:"மீண்டும் முயற்சிக்கவும்",
   logoAlt:"{name} சின்னம்", taglineDefault:"சுவையான கேக்குகள், புதிய பழச்சாறுகள் மற்றும் சூடான சிற்றுண்டிகள். பிறந்தநாள் கேக்கை முன்கூட்டியே ஆர்டர் செய்யுங்கள்.",
   ourMenu:"எங்கள் மெனு", categories:"வகைகள்", perKg:"/ கிலோ", soldOut:"இன்று இல்லை", emptyCat:"இந்த வகையில் இன்னும் பொருட்கள் இல்லை.",
@@ -313,9 +405,13 @@ const FLOURISH = '<svg class="flourish" viewBox="0 0 240 18" fill="none" stroke=
 
 const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
+function localToday(){ const d=new Date(), z=n=>String(n).padStart(2,"0"); return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`; }
+function localMonthStart(){ return localToday().slice(0,8)+"01"; }
 const DEFAULT_SETTINGS = {shopName:"The Buttercream", subtitle:"JUICE BAR & CAFE", tagline:"", address:"", phone:"", owner:""};
 const state = {settings:{...DEFAULT_SETTINGS}, items:[], orders:[], loaded:false, loadError:""};
-const ui = {view:"shop", cat:"all", cart:[], sheet:null, admin:false, tab:"orders", ordFilter:"active", lastOrder:null, busy:false, ordersError:"", ordersLoading:false};
+const ui = {view:"shop", cat:"all", cart:[], sheet:null, admin:false, tab:"orders", ordFilter:"active", lastOrder:null, busy:false, ordersError:"", ordersLoading:false,
+  report:{from:localMonthStart(), to:localToday(), view:"orders", data:null, loading:false, error:""},
+  installEvt:null, seenNew:null};
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -356,9 +452,16 @@ async function loadOrders(){
   ui.ordersLoading = true;
   const {data, error} = await sb.from("orders").select("*").order("needed_date").order("order_no");
   ui.ordersLoading = false;
+  let changed = false;
   if(error){ ui.ordersError = t("errOrders") + error.message; }
-  else { ui.ordersError = ""; state.orders = data || []; }
-  if(ui.view==="admin" && !ui.sheet) render();
+  else {
+    ui.ordersError = ""; state.orders = data || [];
+    const newIds = state.orders.filter(o=>o.status==="new").map(o=>o.id);
+    if(ui.seenNew && newIds.some(id=>!ui.seenNew.has(id))){ beep(); changed = true; }
+    ui.seenNew = new Set([...(ui.seenNew||[]), ...newIds]);
+  }
+  if(ui.view==="admin" && !ui.sheet && (ui.tab==="orders" || changed)) render();
+  else updateTitle();
 }
 
 async function checkAdmin(){
@@ -368,15 +471,111 @@ async function checkAdmin(){
   return !error && data === true;
 }
 
+async function loadReport(){
+  const r = ui.report; r.loading = true; r.error = "";
+  if(ui.tab==="reports" && !ui.sheet) render();
+  const all = []; const page = 1000;
+  for(let from = 0; from < 20000; from += page){
+    let q = sb.from("orders").select("*").order("created_at",{ascending:false}).range(from, from+page-1);
+    if(r.from){ q = q.gte("created_at", parseLocal(r.from).toISOString()); }
+    if(r.to){ const e = parseLocal(r.to); e.setDate(e.getDate()+1); q = q.lt("created_at", e.toISOString()); }
+    const {data, error} = await q;
+    if(error){ r.error = t("errReport") + error.message; break; }
+    all.push(...data);
+    if(data.length < page) break;
+  }
+  r.data = r.error ? null : all; r.loading = false;
+  if(ui.view==="admin" && ui.tab==="reports" && !ui.sheet) render();
+}
+
+function csvCell(v){
+  let s = String(v ?? "");
+  if(/^[=+\-@\t\r]/.test(s) && !/^[+\d][\d\s-]*$/.test(s)) s = "'" + s;
+  return '"' + s.replace(/"/g,'""') + '"';
+}
+function downloadReportCsv(){
+  const r = ui.report, data = r.data || [];
+  let rows;
+  if(r.view==="orders"){
+    rows = [[t("colNo"),t("colReceived"),t("colNeeded"),t("colName"),t("colPhone"),t("colItems"),t("notes"),t("colTotal"),t("colStatus")]]
+      .concat(data.map(o=>[o.order_no, fmtDT(o.created_at), o.needed_date, o.customer_name, o.phone, itemsText(o), o.note||"", Number(o.total)||0, statusOf(o.status).name]));
+  } else {
+    rows = [[t("colName"),t("colPhone"),t("colOrderCount"),t("colSpent"),t("colLast")]]
+      .concat(customerRows(data).map(c=>[c.name, c.phone, c.count, c.spent, fmtDT(c.last)]));
+  }
+  const csv = "\uFEFF" + rows.map(r=>r.map(csvCell).join(",")).join("\r\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `buttercream-${r.view}-${r.from||"start"}-to-${r.to||localToday()}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+
+/* ===== අලුත් ඇණවුම් ශබ්දය ===== */
+let audioCtx = null;
+function unlockAudio(){
+  try{
+    if(!audioCtx){ const AC = window.AudioContext || window.webkitAudioContext; if(AC) audioCtx = new AC(); }
+    if(audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+  }catch(e){}
+}
+function beep(){
+  try{
+    unlockAudio(); if(!audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    [0, 0.28].forEach(dt => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = "sine"; o.frequency.value = dt ? 1175 : 880;
+      g.gain.setValueAtTime(0.0001, t0+dt);
+      g.gain.exponentialRampToValueAtTime(0.35, t0+dt+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0+dt+0.22);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t0+dt); o.stop(t0+dt+0.25);
+    });
+  }catch(e){}
+}
+function updateTitle(){
+  const n = ui.admin ? state.orders.filter(o=>o.status==="new").length : 0;
+  document.title = (n ? `(${n}) ` : "") + state.settings.shopName;
+}
+
+/* ===== මගේ ඇණවුම් (මේ ෆෝන් එකේ) ===== */
+function myOrders(){
+  try{ const v = JSON.parse(localStorage.getItem("bc-my-orders")||"[]"); return Array.isArray(v) ? v : []; }catch(e){ return []; }
+}
+function rememberOrder(no, phone){
+  try{
+    const list = myOrders().filter(o=>o.no!==no);
+    list.unshift({no, phone});
+    localStorage.setItem("bc-my-orders", JSON.stringify(list.slice(0,10)));
+  }catch(e){}
+}
+async function lookupOrder(no, phone){
+  const {data, error} = await sb.rpc("order_status", {p_order_no: Number(no), p_phone: String(phone)});
+  if(error) return {error};
+  return {order: (data && data[0]) || null};
+}
+
+/* ===== ඇප් එක ස්ථාපනය ===== */
+const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+
 let pollTimer = null;
 function startPolling(){
   stopPolling();
-  pollTimer = setInterval(()=>{ if(ui.admin && ui.view==="admin" && ui.tab==="orders" && !document.hidden) loadOrders(); }, 30000);
+  pollTimer = setInterval(()=>{ if(ui.admin && !document.hidden) loadOrders(); }, 30000);
 }
 function stopPolling(){ if(pollTimer){ clearInterval(pollTimer); pollTimer=null; } }
 
 /* ===== Render ===== */
 const COG = '<svg viewBox="0 0 64 64" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 34h24l-4 18H24z"/><path d="M27 34l1.5 18M37 34l-1.5 18"/><path d="M17 34c0-7 5-10 9-10 0-6 3-9 6-9s6 3 6 9c4 0 9 3 9 10z"/><circle cx="34" cy="10" r="3"/></svg>';
+
+const EYE = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10.4 10.4 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2"/><path d="M6.6 6.6C3.9 8.4 2 12 2 12s3.5 7 10 7c1.8 0 3.4-.5 4.8-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
+function pwField(id, ac){
+  return `<div class="pw"><input type="password" id="${id}" autocomplete="${ac}"><button type="button" class="pw-toggle" data-pw="${id}" aria-label="${esc(t("showPw"))}" aria-pressed="false">${EYE}</button></div>`;
+}
 
 function langSwitch(extraStyle=""){
   return `<div class="langs" role="group" aria-label="${esc(t("language"))}" style="${extraStyle}">
@@ -389,8 +588,21 @@ function tagline(){
   return v || t("taglineDefault");
 }
 
+function promoText(){
+  const p = state.settings.promo;
+  if(!p || !p.on) return "";
+  return String(p[LANG] || p.si || p.en || p.ta || "").trim();
+}
+function installButton(){
+  if(isStandalone()) return "";
+  if(ui.installEvt || isIOS()) return `<button class="install" data-act="install">${PHONE_DL}${t("installApp")}</button>`;
+  return "";
+}
+const PHONE_DL = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 7v7M9 11l3 3 3-3"/><path d="M10.5 18.5h3"/></svg>';
+const BOX_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5l9-4.5 9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg>';
+
 function render(){
-  document.title = state.settings.shopName;
+  updateTitle();
   let html;
   if(state.loadError) html = `<div class="loading"><div>${langSwitch("justify-content:center;margin-bottom:16px")}<p>${esc(t(state.loadError))}</p><button class="btn small" data-act="reload">${t("retry")}</button></div></div>`;
   else if(!state.loaded) html = `<div class="loading"><div><div class="spinner"></div>${t("loading")}</div></div>`;
@@ -406,7 +618,7 @@ function shopView(){
   return `
   <header class="hero">
     <div class="wrap" style="position:relative">
-      ${langSwitch("justify-content:flex-end;margin-bottom:14px")}
+      <div class="hero-top">${installButton()}${langSwitch("margin-left:auto")}</div>
       <div class="logo-ring"><img src="${LOGO}" alt="${esc(t("logoAlt",{name:s.shopName}))}"></div>
       <h1 class="goldtext">${esc(s.shopName)}</h1>
       <div class="sub">${esc(s.subtitle)}</div>
@@ -418,8 +630,9 @@ function shopView(){
     ${s.address?`<span style="display:inline-flex;align-items:center;gap:6px">${PIN_ICON}${esc(s.address)}</span>`:""}
     ${s.phone?`<a href="${telHref(s.phone)}">${PHONE_ICON}${esc(s.phone)}</a>`:""}
   </div></div>`:""}
+  ${promoText()?`<div class="promo"><div class="wrap"><span aria-hidden="true">✦</span><span>${esc(promoText())}</span><span aria-hidden="true">✦</span></div></div>`:""}
   <main class="wrap">
-    <div class="menu-head"><h2>${t("ourMenu")}</h2></div>
+    <div class="menu-head"><h2>${t("ourMenu")}</h2><button class="btn ghost small track-btn" data-act="open-track">${BOX_ICON}${t("trackBtn")}</button></div>
     <nav class="chips" aria-label="${esc(t("categories"))}">
       ${CATS.filter(c=>c.id==="all"||state.items.some(i=>i.cat===c.id)).map(c=>`<button class="chip" data-act="cat" data-id="${c.id}" aria-pressed="${ui.cat===c.id}">${c.name}</button>`).join("")}
     </nav>
@@ -507,6 +720,47 @@ function doneSheet(){
     <img class="done-logo" src="${LOGO}" alt="">
     <h2 style="text-align:center">${t("thanks")}</h2>
     <p style="text-align:center">${t("orderNo")}<br><span class="total goldtext" style="font-family:var(--display);font-size:2.2rem">#${esc(o.no)}</span><br><span class="muted">${esc(t("doneMsg",{date:o.date, phone:o.phone}))}</span></p>
+    <button class="btn" data-act="close">${t("ok")}</button>
+    <button class="btn ghost" data-act="open-track">${t("trackTitle")}</button>`;
+}
+
+const STEP_IDS = ["new","making","ready","done"];
+function trackCard(o){
+  const st = statusOf(o.status);
+  const idx = STEP_IDS.indexOf(o.status);
+  return `
+    <div class="panel track-card">
+      <div class="ord-head"><span class="ord-no">#${esc(o.order_no)}</span><span class="status ${st.cls}">${st.name}</span></div>
+      ${o.status==="cancel" ? "" : `<div class="steps" aria-hidden="true">${STEP_IDS.map((id,i)=>`<div class="step ${i<=idx?"on":""}"><span></span><small>${T[LANG].status[id]}</small></div>`).join("")}</div>`}
+      <p style="margin:8px 0 6px;font-weight:500">${esc(T[LANG].statusMsg[o.status]||"")}</p>
+      <div class="muted" style="font-size:.9rem">${t("neededDate")}: <strong style="color:var(--ink)">${esc(o.needed_date)}</strong></div>
+      ${(o.lines||[]).map(l=>`<div class="row" style="font-size:.92rem;margin-top:4px"><span>${esc(l.qty)} × ${esc(l.name)}${l.weight?` (${wLabel(l.weight)})`:""}</span><span>${rs(l.qty*l.unit_price)}</span></div>`).join("")}
+      <div class="row" style="margin-top:8px"><span>${t("total")}</span><strong>${rs(o.total)}</strong></div>
+    </div>`;
+}
+function trackSheet(){
+  const s = ui.sheet;
+  return `
+    ${closeBtn()}
+    <h2>${t("trackTitle")}</h2>
+    ${s.mine.length ? `<p class="muted" style="margin:0 0 10px">${t("myOrders")}</p>
+      ${s.mineLoading ? `<div class="empty" style="padding:20px"><div class="spinner"></div></div>` : s.mine.map(trackCard).join("")}
+      <h3 class="section-title" style="margin-top:18px">${t("trackOther")}</h3>` : ""}
+    <p class="muted" style="margin:0">${t("trackSub")}</p>
+    <label for="tno">${t("orderNoLabel")}</label>
+    <input type="number" id="tno" inputmode="numeric" min="1" placeholder="101" value="${esc(s.no||"")}">
+    <label for="tphone">${t("phone")}</label>
+    <input type="tel" id="tphone" autocomplete="tel" placeholder="07X XXX XXXX" value="${esc(s.phone||"")}">
+    ${s.error?`<div class="err">${esc(t(s.error))}</div>`:""}
+    <button class="btn" data-act="track-check" ${ui.busy?"disabled":""}>${ui.busy?t("checking"):t("check")}</button>
+    ${s.result ? `<div style="margin-top:16px">${trackCard(s.result)}</div>` : ""}`;
+}
+function iosSheet(){
+  return `
+    ${closeBtn()}
+    <img class="done-logo" src="${LOGO}" alt="">
+    <h2 style="text-align:center">${t("iosTitle")}</h2>
+    <p style="text-align:center">${esc(t("iosSteps"))}</p>
     <button class="btn" data-act="close">${t("ok")}</button>`;
 }
 
@@ -518,7 +772,7 @@ function loginSheet(){
     <label for="lemail">${t("email")}</label>
     <input type="text" id="lemail" inputmode="email" autocomplete="username" value="${esc(ui.sheet.email||"")}">
     <label for="lpass">${t("password")}</label>
-    <input type="password" id="lpass" autocomplete="current-password">
+    ${pwField("lpass","current-password")}
     ${ui.sheet.error?`<div class="err">${esc(t(ui.sheet.error))}</div>`:""}
     <button class="btn" data-act="do-login" ${ui.busy?"disabled":""}>${ui.busy?t("loggingIn"):t("login")}</button>`;
 }
@@ -534,10 +788,11 @@ function adminView(){
   <main class="wrap" style="padding-bottom:60px">
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" data-act="tab" data-id="orders" aria-selected="${ui.tab==="orders"}">${t("tabOrders")}${newCount?`<span class="badge">${newCount}</span>`:""}</button>
+      <button class="tab" role="tab" data-act="tab" data-id="reports" aria-selected="${ui.tab==="reports"}">${t("tabReports")}</button>
       <button class="tab" role="tab" data-act="tab" data-id="items" aria-selected="${ui.tab==="items"}">${t("tabMenu")}</button>
       <button class="tab" role="tab" data-act="tab" data-id="settings" aria-selected="${ui.tab==="settings"}">${t("tabSettings")}</button>
     </div>
-    ${ui.tab==="orders"?ordersPanel():ui.tab==="items"?itemsPanel():settingsPanel()}
+    ${ui.tab==="orders"?ordersPanel():ui.tab==="reports"?reportsPanel():ui.tab==="items"?itemsPanel():settingsPanel()}
   </main>`;
 }
 
@@ -569,6 +824,91 @@ function ordersPanel(){
         <div class="row" style="margin-top:10px"><span>${t("total")}</span><span class="total">${rs(o.total)}</span></div>
         <div class="st-btns">${STATUSES.filter(s=>s.id!==o.status).map(s=>`<button class="btn ghost small" data-act="set-status" data-id="${o.id}" data-st="${s.id}">${s.name}</button>`).join("")}</div>
       </article>`;}).join("") : `<div class="empty">${ui.ordFilter==="active"?t("noActive"):t("noPast")}</div>`}`;
+}
+
+
+/* ---------- Reports ---------- */
+const parseLocal = s => { const [y,m,d] = String(s).split("-").map(Number); return new Date(y, m-1, d); };
+const fmtDT = iso => { const d = new Date(iso); const z = n => String(n).padStart(2,"0"); return `${localDate(d)} ${z(d.getHours())}:${z(d.getMinutes())}`; };
+const itemsText = o => (o.lines||[]).map(l => `${l.qty} × ${l.name}${l.weight?` (${wLabel(l.weight)})`:""}${l.message?` "${l.message}"`:""}`).join("; ");
+function customerRows(orders){
+  const map = new Map();
+  for(const o of orders){
+    const key = String(o.phone).replace(/\D/g,"").replace(/^94/,"0");
+    let c = map.get(key);
+    if(!c){ c = {name:o.customer_name, phone:o.phone, count:0, spent:0, last:o.created_at}; map.set(key,c); }
+    c.count++;
+    if(o.status!=="cancel") c.spent += Number(o.total)||0;
+    if(o.created_at > c.last){ c.last = o.created_at; c.name = o.customer_name; c.phone = o.phone; }
+  }
+  return [...map.values()].sort((a,b)=> b.spent-a.spent || b.count-a.count);
+}
+
+function reportsPanel(){
+  const r = ui.report;
+  const data = r.data || [];
+  const delivered = data.filter(o=>o.status==="done");
+  const cancelled = data.filter(o=>o.status==="cancel");
+  const pending = data.length - delivered.length - cancelled.length;
+  const sales = delivered.reduce((a,o)=>a+(Number(o.total)||0),0);
+  const customers = customerRows(data);
+  const stat = (k,v) => `<div class="stat"><div class="v">${v}</div><div class="k">${k}</div></div>`;
+  let body;
+  if(r.loading) body = `<div class="empty"><div class="spinner"></div>${t("reportLoading")}</div>`;
+  else if(r.error) body = `<div class="err">${esc(r.error)}</div>`;
+  else if(!data.length) body = `<div class="empty">${t("noReport")}</div>`;
+  else body = `
+    <div class="stats">
+      ${stat(t("rOrders"), data.length)}
+      ${stat(t("rDelivered"), delivered.length)}
+      ${stat(t("rPending"), pending)}
+      ${stat(t("rCancelled"), cancelled.length)}
+      ${stat(t("rSales"), rs(sales))}
+      ${stat(t("rCustomers"), customers.length)}
+    </div>
+    <div class="toolbar report-actions" style="margin:18px 0 10px">
+      <div class="chips" style="padding:0">
+        <button class="chip" data-act="rep-view" data-id="orders" aria-pressed="${r.view==="orders"}">${t("viewOrders")}</button>
+        <button class="chip" data-act="rep-view" data-id="customers" aria-pressed="${r.view==="customers"}">${t("viewCustomers")}</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost small" data-act="rep-csv">${t("downloadCsv")}</button>
+        <button class="btn ghost small" data-act="rep-print">${t("print")}</button>
+      </div>
+    </div>
+    ${r.view==="orders" ? `
+    <div class="tablewrap"><table>
+      <thead><tr><th>${t("colNo")}</th><th>${t("colReceived")}</th><th>${t("colNeeded")}</th><th>${t("colName")}</th><th>${t("colPhone")}</th><th>${t("colItems")}</th><th class="num">${t("colTotal")}</th><th>${t("colStatus")}</th></tr></thead>
+      <tbody>${data.map(o=>{const st=statusOf(o.status); return `<tr>
+        <td>#${esc(o.order_no)}</td><td>${esc(fmtDT(o.created_at))}</td><td>${esc(o.needed_date)}</td>
+        <td>${esc(o.customer_name)}</td><td><a href="${telHref(o.phone)}">${esc(o.phone)}</a></td>
+        <td class="items">${esc(itemsText(o))}${o.note?`<div class="muted">${esc(o.note)}</div>`:""}</td>
+        <td class="num">${rs(o.total)}</td><td><span class="status ${st.cls}">${st.name}</span></td></tr>`;}).join("")}</tbody>
+    </table></div>` : `
+    <div class="tablewrap"><table>
+      <thead><tr><th>${t("colName")}</th><th>${t("colPhone")}</th><th class="num">${t("colOrderCount")}</th><th class="num">${t("colSpent")}</th><th>${t("colLast")}</th></tr></thead>
+      <tbody>${customers.map(c=>`<tr>
+        <td>${esc(c.name)}</td><td><a href="${telHref(c.phone)}">${esc(c.phone)}</a></td>
+        <td class="num">${c.count}</td><td class="num">${rs(c.spent)}</td><td>${esc(fmtDT(c.last))}</td></tr>`).join("")}</tbody>
+    </table></div>
+    <p class="muted" style="font-size:.85rem">${t("spentNote")}</p>`}`;
+  return `
+    <div class="panel report-actions">
+      <div class="chips" style="padding:0 0 10px">
+        <button class="chip" data-act="rep-range" data-r="today">${t("today")}</button>
+        <button class="chip" data-act="rep-range" data-r="7">${t("last7")}</button>
+        <button class="chip" data-act="rep-range" data-r="month">${t("thisMonth")}</button>
+        <button class="chip" data-act="rep-range" data-r="all">${t("allTime")}</button>
+      </div>
+      <div class="range">
+        <div><label for="rfrom" style="margin-top:0">${t("from")}</label><input type="date" id="rfrom" value="${esc(r.from)}"></div>
+        <div><label for="rto" style="margin-top:0">${t("to")}</label><input type="date" id="rto" value="${esc(r.to)}"></div>
+        <button class="btn small" data-act="rep-show">${t("show")}</button>
+      </div>
+      <p class="muted" style="font-size:.85rem;margin:10px 0 0">${t("reportNote")}</p>
+    </div>
+    <div class="print-title"><strong>${esc(state.settings.shopName)}</strong>, ${esc(r.from||"…")} – ${esc(r.to||"…")}</div>
+    ${body}`;
 }
 
 function itemsPanel(){
@@ -609,7 +949,18 @@ function editSheet(){
 
 function settingsPanel(){
   const s = state.settings;
+  const pr = s.promo || {};
   return `
+    <div class="panel">
+      <h3 class="section-title">${t("promoTitle")}</h3>
+      <label class="toggle" style="margin-top:6px"><input type="checkbox" id="pon" ${pr.on?"checked":""}> ${t("promoOn")}</label>
+      <label for="psi">${t("promoSi")}</label><textarea id="psi" lang="si" placeholder="${esc(T.si.promoPh)}">${esc(pr.si)}</textarea>
+      <label for="pen">${t("promoEn")}</label><textarea id="pen" lang="en" placeholder="${esc(T.en.promoPh)}">${esc(pr.en)}</textarea>
+      <label for="pta">${t("promoTa")}</label><textarea id="pta" lang="ta" placeholder="${esc(T.ta.promoPh)}">${esc(pr.ta)}</textarea>
+      <p class="muted" style="font-size:.85rem;margin:8px 0 0">${t("promoNote")}</p>
+      <div id="prmsg"></div>
+      <button class="btn" data-act="save-settings" data-msg="prmsg">${t("savePromo")}</button>
+    </div>
     <div class="panel">
       <h3 class="section-title">${t("shopDetails")}</h3>
       <label for="sname">${t("shopName")}</label><input type="text" id="sname" value="${esc(s.shopName)}">
@@ -621,12 +972,12 @@ function settingsPanel(){
       <label for="sphone">${t("phoneWa")}</label><input type="tel" id="sphone" value="${esc(s.phone)}">
       <label for="sowner">${t("owner")}</label><input type="text" id="sowner" value="${esc(s.owner)}">
       <div id="smsg"></div>
-      <button class="btn" data-act="save-settings">${t("saveSettings")}</button>
+      <button class="btn" data-act="save-settings" data-msg="smsg">${t("saveSettings")}</button>
     </div>
     <div class="panel">
       <h3 class="section-title">${t("changePass")}</h3>
-      <label for="np1">${t("newPass")}</label><input type="password" id="np1" autocomplete="new-password">
-      <label for="np2">${t("newPass2")}</label><input type="password" id="np2" autocomplete="new-password">
+      <label for="np1">${t("newPass")}</label>${pwField("np1","new-password")}
+      <label for="np2">${t("newPass2")}</label>${pwField("np2","new-password")}
       <div id="pmsg"></div>
       <button class="btn" data-act="change-pass">${t("changePass")}</button>
     </div>`;
@@ -634,7 +985,7 @@ function settingsPanel(){
 
 function sheetView(){
   if(!ui.sheet) return "";
-  const body = {item:itemSheet, cart:cartSheet, done:doneSheet, login:loginSheet, edit:editSheet}[ui.sheet.kind]();
+  const body = {item:itemSheet, cart:cartSheet, done:doneSheet, login:loginSheet, edit:editSheet, track:trackSheet, ios:iosSheet}[ui.sheet.kind]();
   return `<div class="backdrop" data-act="backdrop"><div class="sheet" role="dialog" aria-modal="true">${body}</div></div>`;
 }
 
@@ -690,6 +1041,18 @@ document.addEventListener("keydown", e=>{
   if(e.key==="Enter" && (e.target.id==="lpass"||e.target.id==="lemail")) act("do-login", e.target);
 });
 document.addEventListener("click", e=>{
+  const tg = e.target.closest("[data-pw]");
+  if(tg){
+    const inp = document.getElementById(tg.dataset.pw);
+    if(!inp) return;
+    const show = inp.type === "password";
+    inp.type = show ? "text" : "password";
+    tg.innerHTML = show ? EYE_OFF : EYE;
+    tg.setAttribute("aria-label", t(show ? "hidePw" : "showPw"));
+    tg.setAttribute("aria-pressed", String(show));
+    inp.focus();
+    return;
+  }
   const el = e.target.closest("[data-act]");
   if(!el) return;
   if(el.dataset.act==="backdrop" && e.target!==el) return;
@@ -702,6 +1065,30 @@ async function act(a, el){
   switch(a){
     case "reload": state.loadError=""; render(); loadShop(); return;
     case "lang": setLang(d.id); break;
+    case "install":
+      if(ui.installEvt){ const ev = ui.installEvt; ev.prompt(); try{ await ev.userChoice; }catch(e){} ui.installEvt = null; }
+      else ui.sheet = {kind:"ios"};
+      break;
+    case "open-track":{
+      const mine = myOrders();
+      ui.sheet = {kind:"track", mine:[], mineLoading:mine.length>0, no:"", phone:"", error:"", result:null};
+      render();
+      if(mine.length){
+        const res = await Promise.all(mine.map(m=>lookupOrder(m.no, m.phone)));
+        if(ui.sheet && ui.sheet.kind==="track"){ ui.sheet.mine = res.map(r=>r.order).filter(Boolean); ui.sheet.mineLoading = false; }
+      }
+      break;}
+    case "track-check":{
+      const s = ui.sheet; s.no = $("#tno").value.trim(); s.phone = $("#tphone").value.trim(); s.result = null;
+      if(!s.no){ s.error="errNo"; break; }
+      if(!/^[0-9+\s-]{9,15}$/.test(s.phone)){ s.error="errPhone"; break; }
+      ui.busy = true; s.error = ""; render();
+      const r = await lookupOrder(s.no, s.phone);
+      ui.busy = false;
+      if(r.error) s.error = "errOrder";
+      else if(!r.order) s.error = "notFound";
+      else s.result = r.order;
+      break;}
     case "cat": ui.cat=d.id; break;
     case "open-item": ui.sheet={kind:"item",id:d.id,qty:1,weight:1,message:""}; break;
     case "weight": ui.sheet.weight=Number(d.w); break;
@@ -731,14 +1118,17 @@ async function act(a, el){
         break;
       }
       ui.lastOrder={no:data, date:f.date, phone:f.phone};
+      rememberOrder(data, f.phone);
       ui.cart=[]; ui.sheet={kind:"done"}; break;}
     case "close": case "backdrop": if(!ui.busy) ui.sheet=null; break;
 
     case "admin-login":
+      unlockAudio();
       if(await checkAdmin()){ ui.admin=true; ui.view="admin"; window.scrollTo(0,0); loadOrders(); startPolling(); }
       else ui.sheet={kind:"login"};
       break;
     case "do-login":{
+      unlockAudio();
       const email=$("#lemail").value.trim(), password=$("#lpass").value;
       ui.sheet.email=email;
       if(!email||!password){ ui.sheet.error="errBoth"; break; }
@@ -751,9 +1141,23 @@ async function act(a, el){
       ui.admin=true; ui.view="admin"; ui.sheet=null; window.scrollTo(0,0);
       loadOrders(); startPolling();
       break;}
-    case "logout": await sb.auth.signOut(); ui.admin=false; ui.view="shop"; state.orders=[]; stopPolling(); break;
+    case "logout": await sb.auth.signOut(); ui.admin=false; ui.view="shop"; state.orders=[]; ui.report.data=null; stopPolling(); break;
     case "view-shop": ui.view="shop"; break;
-    case "tab": ui.tab=d.id; if(d.id==="orders") loadOrders(); break;
+    case "tab": ui.tab=d.id; if(d.id==="orders") loadOrders(); if(d.id==="reports" && !ui.report.data && !ui.report.loading) loadReport(); break;
+    case "rep-range":{
+      const r=ui.report, today=localToday();
+      if(d.r==="today"){ r.from=today; r.to=today; }
+      else if(d.r==="7"){ const x=new Date(); x.setDate(x.getDate()-6); r.from=localDate(x); r.to=today; }
+      else if(d.r==="month"){ r.from=localMonthStart(); r.to=today; }
+      else { r.from=""; r.to=""; }
+      loadReport(); return;}
+    case "rep-show":{
+      const r=ui.report; r.from=$("#rfrom").value; r.to=$("#rto").value;
+      if(r.from && r.to && r.from>r.to){ const x=r.from; r.from=r.to; r.to=x; }
+      loadReport(); return;}
+    case "rep-view": ui.report.view=d.id; break;
+    case "rep-csv": downloadReportCsv(); return;
+    case "rep-print": window.print(); return;
     case "ord-filter": ui.ordFilter=d.id; break;
     case "refresh-orders": loadOrders(); break;
     case "set-status":{
@@ -801,11 +1205,13 @@ async function act(a, el){
       const next = {...state.settings,
         shopName:$("#sname").value.trim()||state.settings.shopName, subtitle:$("#ssub").value.trim(),
         tagline:$("#stag").value.trim(), tagline_en:$("#stagen").value.trim(), tagline_ta:$("#stagta").value.trim(), address:$("#saddr").value.trim(),
-        phone:$("#sphone").value.trim(), owner:$("#sowner").value.trim()};
+        phone:$("#sphone").value.trim(), owner:$("#sowner").value.trim(),
+        promo:{on:$("#pon").checked, si:$("#psi").value.trim(), en:$("#pen").value.trim(), ta:$("#pta").value.trim()}};
+      const msgId = d.msg || "smsg";
       const {error} = await sb.from("shop_settings").update({data:next}).eq("id",1);
-      if(error){ $("#smsg").innerHTML=`<div class="err">${esc(t("errSave")+error.message)}</div>`; return; }
+      if(error){ document.getElementById(msgId).innerHTML=`<div class="err">${esc(t("errSave")+error.message)}</div>`; return; }
       state.settings = next; render();
-      $("#smsg").innerHTML=`<div style="color:var(--ok);margin-top:8px">${t("saved")}</div>`; return;}
+      document.getElementById(msgId).innerHTML=`<div style="color:var(--ok);margin-top:8px">${t("saved")}</div>`; return;}
     case "change-pass":{
       const p1=$("#np1").value, p2=$("#np2").value;
       if(p1.length<8){ $("#pmsg").innerHTML=`<div class="err">${t("errPassLen")}</div>`; return; }
@@ -817,6 +1223,12 @@ async function act(a, el){
   }
   render();
   if(a==="admin-login" && ui.sheet) setTimeout(()=>$("#lemail")?.focus(),50);
+}
+
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); ui.installEvt = e; if(ui.view==="shop" && !ui.sheet && state.loaded) render(); });
+window.addEventListener("appinstalled", () => { ui.installEvt = null; if(!ui.sheet) render(); });
+if("serviceWorker" in navigator && location.protocol === "https:"){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
 }
 
 loadShop();
